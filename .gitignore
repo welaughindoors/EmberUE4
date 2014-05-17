@@ -226,6 +226,7 @@ pip-log.txt
 *.sln
 *.uproject
 *.suo
+Binaries/Win64/UE4Editor-EmberUE4.dll
 DerivedDataCache/
 Intermediate/
 Saved/
