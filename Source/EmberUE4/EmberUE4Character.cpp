@@ -40,7 +40,17 @@ AEmberUE4Character::AEmberUE4Character(const class FPostConstructInitializePrope
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	//SwordModel->AttachTo(Mesh, WeaponAttach, EAttachLocation::SnapToTarget);
+	
+}
+
+void AEmberUE4Character::AttachSword()
+{
+	UWorld* const World = GetWorld();
+	if(!SwordModel)
+	{
+		SwordModel = World->SpawnActor<ASwordModel>(ASwordModel::StaticClass());
+		SwordModel->AttachRootComponentTo(this->Mesh, FName(TEXT("RIGHT_HAND_ATTACH")));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -51,6 +61,10 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
 	// Set up gameplay key bindings
 	check(InputComponent);
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+
+	InputComponent->BindAction("LightStance", IE_Pressed, this, &AEmberUE4Character::LightStance);
+	InputComponent->BindAction("MediumStance", IE_Pressed, this, &AEmberUE4Character::MediumStance);
+	InputComponent->BindAction("HeavyStance", IE_Pressed, this, &AEmberUE4Character::HeavyStance);
 
 	InputComponent->BindAxis("MoveForward", this, &AEmberUE4Character::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AEmberUE4Character::MoveRight);
@@ -67,6 +81,35 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
 	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AEmberUE4Character::TouchStarted);
 }
 
+void AEmberUE4Character::LightStance()
+{
+	 if (GEngine)
+      {
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Light Stance"));
+		
+			AttachSword();
+      }
+}
+
+void AEmberUE4Character::MediumStance()
+{
+ if (GEngine)
+      {
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Medium Stance"));
+			if(SwordModel)
+            SwordModel->SetSkeletalMesh(0);		
+      }
+}
+
+void AEmberUE4Character::HeavyStance()
+{
+	 if (GEngine)
+      {
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Heavy Stance"));
+			if(SwordModel)
+			SwordModel->SetSkeletalMesh(1);		
+      }
+}
 
 void AEmberUE4Character::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {

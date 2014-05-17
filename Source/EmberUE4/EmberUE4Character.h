@@ -49,6 +49,12 @@ protected:
 	/** Handler for when a touch input begins. */
 	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
 
+	void LightStance();
+	void MediumStance();
+	void HeavyStance();
+
+	void AttachSword();
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) OVERRIDE;
