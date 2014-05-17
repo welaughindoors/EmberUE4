@@ -226,10 +226,14 @@ pip-log.txt
 *.sln
 *.uproject
 *.suo
-Binaries/
+*.dll
+[Bb]inaries/Win64/
+Binaries/Win64/UE4Editor-EmberUE4.dll
 DerivedDataCache/
 Intermediate/
-Saved/
+Saved/Autosaves/
+Saved/Backup/
+Saved/Logs/
 Content/Animations/
 Content/Architecture
 Content/Audio
