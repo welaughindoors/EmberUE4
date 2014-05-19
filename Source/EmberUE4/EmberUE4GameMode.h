@@ -6,7 +6,7 @@
 UCLASS(minimalapi)
 class AEmberUE4GameMode : public AGameMode
 {
-	GENERATED_UCLASS_BODY()
+    GENERATED_UCLASS_BODY()
 
 };
 
