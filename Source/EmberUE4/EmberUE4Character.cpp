@@ -40,7 +40,9 @@ AEmberUE4Character::AEmberUE4Character(const class FPostConstructInitializePrope
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	 
+	 PrimaryActorTick.bCanEverTick = true;
+	 DrawSwordDebug = false;
+	 DrawNewSwordDebug = false;
 }
 
 void AEmberUE4Character::BeginPlay()
@@ -87,6 +89,61 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
 	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AEmberUE4Character::TouchStarted);
 }
 
+void AEmberUE4Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+			if(SwordModel && DrawSwordDebug)
+			{
+				FVector socketLocation = SwordModel->Sphere1->GetSocketLocation("StartControl");
+				FVector socketLocation2 = SwordModel->Sphere1->GetSocketLocation("EndControl");
+				DrawDebugLine(GetWorld(), socketLocation,  socketLocation2,  FColor(255,0,0),  false, 2, 0,  5 );
+			}
+			if(SwordModel && DrawNewSwordDebug)
+			{
+				TArray <FVector> nArray;
+				FVector distance;
+				FVector normaled;
+				float dSize;
+
+				FVector socketLocation = SwordModel->Sphere1->GetSocketLocation("StartControl");
+				FVector socketLocation2 = SwordModel->Sphere1->GetSocketLocation("EndControl");
+
+				normaled = (socketLocation2 - socketLocation);
+				normaled.Normalize();
+				distance = socketLocation2 - socketLocation;
+				dSize = distance.Size();
+
+				dSize /= 14;
+
+				for(int i = 1; i < 14; i++)
+				nArray.Add(socketLocation + (normaled * (dSize * i)));
+				nArray.Add(socketLocation2);
+
+				if(nArray.Num() != oldPoints.Num())
+				{
+					oldPoints = nArray;
+				}
+
+				for (int i = 0; i < nArray.Num(); ++i) 
+				{
+				//DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(255,0,0),  false, 2, 0,  1 );
+	      	if(i < 5)
+		        DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(255,0,255),  false, 2, 0,  1 );
+
+	      	else if (i >= 5 && i < 10)	
+	      	DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(0,0,255),  false, 2, 0,  1 );
+
+	    	 else if (i >= 10 && i < 15)
+				 DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(34, 139, 34),  false, 2, 0,  1 );
+				}
+					oldPoints = nArray;
+
+
+				//oldStart = socketLocation;
+				//oldEnd = socketLocation2;
+			}
+}
+
 void AEmberUE4Character::LightStance()
 {
 	 if (GEngine)
@@ -106,6 +163,7 @@ void AEmberUE4Character::MediumStance()
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Medium Stance"));
 			if(SwordModel)
 				SwordModel->SetSkeletalMesh(1);		
+			DrawSwordDebug = !DrawSwordDebug;
       }
 }
 
@@ -116,6 +174,11 @@ void AEmberUE4Character::HeavyStance()
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Heavy Stance"));
 			if(SwordModel)
 				SwordModel->SetSkeletalMesh(2);		
+			DrawNewSwordDebug = !DrawNewSwordDebug;
+				FVector socketLocation = SwordModel->Sphere1->GetSocketLocation("StartControl");
+				FVector socketLocation2 = SwordModel->Sphere1->GetSocketLocation("EndControl");
+				oldStart = socketLocation;
+				oldEnd = socketLocation2;
       }
 }
 
