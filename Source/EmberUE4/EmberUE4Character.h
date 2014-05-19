@@ -10,6 +10,8 @@ class AEmberUE4Character : public ACharacter
 {
 	GENERATED_UCLASS_BODY()
 
+	virtual void BeginPlay() OVERRIDE;
+
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	TSubobjectPtr<class USpringArmComponent> CameraBoom;

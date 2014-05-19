@@ -234,6 +234,8 @@ Intermediate/
 Saved/Autosaves/
 Saved/Backup/
 Saved/Logs/
+Saved/AutoScreenshot.*
+Saved/Config/Windows/EditorUserSettings.ini
 Content/Animations/
 Content/Architecture
 Content/Audio

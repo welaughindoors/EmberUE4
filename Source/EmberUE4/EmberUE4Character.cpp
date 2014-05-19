@@ -40,7 +40,13 @@ AEmberUE4Character::AEmberUE4Character(const class FPostConstructInitializePrope
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	
+	 
+}
+
+void AEmberUE4Character::BeginPlay()
+{
+	Super::BeginPlay();
+	AttachSword();
 }
 
 void AEmberUE4Character::AttachSword()
@@ -86,8 +92,10 @@ void AEmberUE4Character::LightStance()
 	 if (GEngine)
       {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Light Stance"));
-		
-			AttachSword();
+			
+			if(SwordModel)
+				SwordModel->SetSkeletalMesh(0);		
+			//AttachSword();
       }
 }
 
@@ -97,7 +105,7 @@ void AEmberUE4Character::MediumStance()
       {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Medium Stance"));
 			if(SwordModel)
-            SwordModel->SetSkeletalMesh(0);		
+				SwordModel->SetSkeletalMesh(1);		
       }
 }
 
@@ -107,7 +115,7 @@ void AEmberUE4Character::HeavyStance()
       {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Heavy Stance"));
 			if(SwordModel)
-			SwordModel->SetSkeletalMesh(1);		
+				SwordModel->SetSkeletalMesh(2);		
       }
 }
 
