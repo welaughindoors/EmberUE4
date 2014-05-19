@@ -70,15 +70,13 @@ void ASwordModel::TraceSword()
 			distance /= tracerAmount - 1;
 
             // Create points along sword to trace from
-            for(int i = 1; i < tracerAmount - 1; i++)
+				nArray.Add(vStart);
+            for(int i = 1; i < tracerAmount; i++)
                 nArray.Add(vStart + (normaled * (distance * i)));
                 nArray.Add(vEnd);
 
             // If this is the first attack, make oldpoints = new points (to avoid zero loc traces)
-            if(nArray.Num() != oldPoints.Num())
-                {
-                    oldPoints = nArray;
-                }
+            if(nArray.Num() != oldPoints.Num()) oldPoints = nArray;
 
             // Do the trace for each point (debug only atm)
             for (int i = 0; i < nArray.Num(); ++i)
