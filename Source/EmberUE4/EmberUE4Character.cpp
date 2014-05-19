@@ -40,6 +40,12 @@ AEmberUE4Character::AEmberUE4Character(const class FPostConstructInitializePrope
 
     // Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character)
     // are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> SwordBlueprint(TEXT("Blueprint'/Game/Blueprints/SwordModelBlueprint.SwordModelBlueprint'"));
+    if (SwordBlueprint.Object != NULL)
+    {
+       SwordBlueprint_GeneratedClass = (UClass*)SwordBlueprint.Object->GeneratedClass;
+    }
     PrimaryActorTick.bCanEverTick = true;
     DrawSwordDebug = false;
     DrawNewSwordDebug = false;
@@ -60,7 +66,8 @@ void AEmberUE4Character::AttachSword()
     UWorld* const World = GetWorld();
     if(!SwordModel)
         {
-            SwordModel = World->SpawnActor<ASwordModel>(ASwordModel::StaticClass());
+			SwordModel = World->SpawnActor<ASwordModel>(SwordBlueprint_GeneratedClass);
+            //SwordModel = World->SpawnActor<ASwordModel>(ASwordModel::StaticClass());
             SwordModel->AttachRootComponentTo(this->Mesh, FName(TEXT("RIGHT_HAND_ATTACH")));
         }
 }

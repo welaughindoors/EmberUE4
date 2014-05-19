@@ -26,7 +26,7 @@ ASwordModel::ASwordModel(const class FPostConstructInitializeProperties& PCIP)
     RootComponent = Mesh;
     //Sphere1->OnComponentBeginOverlap.AddDynamic(this, &ASwordModel::OnOverlap);        // set up a notification for when this component overlaps something
     //Sphere1->OnComponentEndOverlap.AddDynamic(this, &ASwordModel::OnOverlap);      // set up a notification for when this component overlaps something
-	tracerAmount = 15;
+	//tracerAmount = 15;
 }
 
 void ASwordModel::SetSkeletalMesh(int Index)

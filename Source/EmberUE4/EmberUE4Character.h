@@ -1,6 +1,7 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 #pragma once
 
+#include "GameFramework/Actor.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "SwordModel.h"
 #include "EmberUtilities.h"
@@ -67,6 +68,7 @@ protected:
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) OVERRIDE;
     // End of APawn interface
 private:
+    UClass* SwordBlueprint_GeneratedClass;
     ASwordModel * SwordModel;
     //EmberSwordCalculations * ESwordCalculations;
     bool DrawSwordDebug;

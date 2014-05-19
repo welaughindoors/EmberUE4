@@ -13,8 +13,11 @@ class ASwordModel : public AActor
 {
     GENERATED_UCLASS_BODY()
     /** sphere component */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Switch Components")
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Sword Components")
     TSubobjectPtr<USkeletalMeshComponent> Mesh;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Sword Variables")
+    float tracerAmount;
 
     UPROPERTY(VisibleAnywhere, Category = Mesh)
     USkeletalMesh * SwordMesh1;
@@ -35,8 +38,6 @@ public:
 
     void SetSkeletalMesh(int Index);
     void TraceSword();
-
-    int tracerAmount;
 
 	FVector StartSocket();
 	FVector EndSocket();
