@@ -33,6 +33,14 @@ class AEmberUE4Character : public ACharacter
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     float BaseLookUpRate;
 
+    /** Hook to know what keys are pressed when executing an attack. 0 = W, 1 = A, 2 = S, 3 = D */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Movement Variables")
+    int32 Keyboard_WASD_Hook[4];
+
+    /** Changes stance. Index based. 0 = light, 1 = balance, 2 = heavy */
+    UFUNCTION(BlueprintCallable, Category = "Stance Functions")
+    void ChangeStance(int32 Index);
+
 protected:
 
     /** Called for forwards/backward input */
@@ -81,6 +89,6 @@ private:
     FVector oldStart;
     FVector oldEnd;
     TArray <FVector> oldPoints;
-    int Keyboard_WASD_Hook[4];
+    
 };
 

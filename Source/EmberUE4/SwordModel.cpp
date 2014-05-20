@@ -74,7 +74,7 @@ void ASwordModel::TraceSword()
             // If this is the first attack, make oldpoints = new points (to avoid zero loc traces)
             if(nArray.Num() != oldPoints.Num()) oldPoints = nArray;
 
-            // Do the trace for each point (debug only atm)
+            // Do the trace for each point 
             for (int i = 0; i < nArray.Num(); ++i)
                 {
                     if(i < nArray.Num()/3)
@@ -86,6 +86,7 @@ void ASwordModel::TraceSword()
 					else if (i >= (2*nArray.Num())/3 && i < nArray.Num())
                         DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(34, 139, 34),  false, 2, 0,  1 );
 
+					//Actual real trace
                     if (GetWorld()->LineTraceSingle(testHitResult, nArray[i], oldPoints[i], ECC_WorldStatic, TraceParams))
                         HitResultArray.Add(testHitResult);
                 }

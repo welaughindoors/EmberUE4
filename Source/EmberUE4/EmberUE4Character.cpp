@@ -153,15 +153,18 @@ void AEmberUE4Character::SwordDebug()
         }
 }
 
+void AEmberUE4Character::ChangeStance(int32 Index)
+{
+    if(SwordModel)
+        SwordModel->SetSkeletalMesh(Index);
+}
+
 void AEmberUE4Character::LightStance()
 {
     if (GEngine)
         {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Light Stance"));
-
-            if(SwordModel)
-                SwordModel->SetSkeletalMesh(0);
-            //AttachSword();
+            ChangeStance(0);
         }
 }
 
@@ -170,8 +173,7 @@ void AEmberUE4Character::MediumStance()
     if (GEngine)
         {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Medium Stance"));
-            if(SwordModel)
-                SwordModel->SetSkeletalMesh(1);
+            ChangeStance(1);
             DrawSwordDebug = !DrawSwordDebug;
         }
 }
@@ -181,13 +183,8 @@ void AEmberUE4Character::HeavyStance()
     if (GEngine)
         {
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Heavy Stance"));
-            if(SwordModel)
-                SwordModel->SetSkeletalMesh(2);
+            ChangeStance(2);
             DrawNewSwordDebug = !DrawNewSwordDebug;
-            //FVector socketLocation = SwordModel->Sphere1->GetSocketLocation("StartControl");
-            //FVector socketLocation2 = SwordModel->Sphere1->GetSocketLocation("EndControl");
-            //oldStart = socketLocation;
-            //oldEnd = socketLocation2;
         }
 }
 
