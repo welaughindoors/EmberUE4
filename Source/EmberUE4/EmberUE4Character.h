@@ -60,6 +60,11 @@ protected:
     void MediumStance();
     void HeavyStance();
 
+	void W_Pressed();
+	void A_Pressed();
+	void S_Pressed();
+	void D_Pressed();
+
     void AttachSword();
 	void SwordDebug();
 
@@ -76,5 +81,6 @@ private:
     FVector oldStart;
     FVector oldEnd;
     TArray <FVector> oldPoints;
+    int Keyboard_WASD_Hook[4];
 };
 

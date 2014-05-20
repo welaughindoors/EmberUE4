@@ -85,12 +85,23 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
     InputComponent->BindAction("MediumStance", IE_Pressed, this, &AEmberUE4Character::MediumStance);
     InputComponent->BindAction("HeavyStance", IE_Pressed, this, &AEmberUE4Character::HeavyStance);
 
+	InputComponent->BindAction("W_Pressed", IE_Pressed, this, &AEmberUE4Character::W_Pressed);
+	InputComponent->BindAction("A_Pressed", IE_Pressed, this, &AEmberUE4Character::A_Pressed);
+	InputComponent->BindAction("S_Pressed", IE_Pressed, this, &AEmberUE4Character::S_Pressed);
+	InputComponent->BindAction("D_Pressed", IE_Pressed, this, &AEmberUE4Character::D_Pressed);
+	
+	InputComponent->BindAction("W_Pressed", IE_Released, this, &AEmberUE4Character::W_Pressed);
+	InputComponent->BindAction("A_Pressed", IE_Released, this, &AEmberUE4Character::A_Pressed);
+	InputComponent->BindAction("S_Pressed", IE_Released, this, &AEmberUE4Character::S_Pressed);
+	InputComponent->BindAction("D_Pressed", IE_Released, this, &AEmberUE4Character::D_Pressed);
+
+	
     InputComponent->BindAxis("MoveForward", this, &AEmberUE4Character::MoveForward);
     InputComponent->BindAxis("MoveRight", this, &AEmberUE4Character::MoveRight);
 
     // We have 2 versions of the rotation bindings to handle different kinds of devices differently
     // "turn" handles devices that provide an absolute delta, such as a mouse.
-    // "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
+    // "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick	
     InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
     InputComponent->BindAxis("TurnRate", this, &AEmberUE4Character::TurnAtRate);
     InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
@@ -98,6 +109,26 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
 
     // handle touch devices
     InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AEmberUE4Character::TouchStarted);
+}
+
+void AEmberUE4Character::W_Pressed()
+{
+	Keyboard_WASD_Hook[0] = Keyboard_WASD_Hook[0] ^ 1;
+
+    //if(Keyboard_WASD_Hook[0] & 1)
+        //EmberUtilities::Debug("Active");
+}
+void AEmberUE4Character::A_Pressed()
+{
+	Keyboard_WASD_Hook[1] = Keyboard_WASD_Hook[1] ^ 1;
+}
+void AEmberUE4Character::S_Pressed()
+{
+	Keyboard_WASD_Hook[2] = Keyboard_WASD_Hook[2] ^ 1;
+}
+void AEmberUE4Character::D_Pressed()
+{
+	Keyboard_WASD_Hook[3] = Keyboard_WASD_Hook[3] ^ 1;
 }
 
 void AEmberUE4Character::Tick(float DeltaTime)
@@ -183,6 +214,7 @@ void AEmberUE4Character::LookUpAtRate(float Rate)
 
 void AEmberUE4Character::MoveForward(float Value)
 {
+
     if ((Controller != NULL) && (Value != 0.0f))
         {
             // find out which way is forward

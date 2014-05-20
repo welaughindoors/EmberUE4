@@ -18,15 +18,9 @@ class ASwordModel : public AActor
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Sword Variables")
     float tracerAmount;
-
-    UPROPERTY(VisibleAnywhere, Category = Mesh)
-    USkeletalMesh * SwordMesh1;
-
-    UPROPERTY(VisibleAnywhere, Category = Mesh)
-    USkeletalMesh * SwordMesh2;
-
-    UPROPERTY(VisibleAnywhere, Category = Mesh)
-    USkeletalMesh * SwordMesh3;
+	
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh)
+    TArray<USkeletalMesh*> SwordMeshes;
     /** called when something overlaps the sphere component */
     //  UFUNCTION(BlueprintNativeEvent, Category="Switch Functions")
     //  void OnOverlap(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
@@ -38,7 +32,7 @@ public:
 
     void SetSkeletalMesh(int Index);
     void TraceSword();
-
+	
 	FVector StartSocket();
 	FVector EndSocket();
     TArray <FVector> oldPoints;
