@@ -8,8 +8,7 @@ ASwordModel::ASwordModel(const class FPostConstructInitializeProperties& PCIP)
     : Super(PCIP)
 {
     Mesh = PCIP.CreateAbstractDefaultSubobject<USkeletalMeshComponent>(this, TEXT("Block"));
-
-
+	
     static ConstructorHelpers::FObjectFinder <UMaterial>Material_Blue(TEXT("Material'/Game/Materials/M_Ground_Grass.M_Ground_Grass'"));
 
     static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_heavy2.ember_weapon_heavy2'"));		
