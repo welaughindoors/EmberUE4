@@ -14,13 +14,13 @@ ASwordModel::ASwordModel(const class FPostConstructInitializeProperties& PCIP)
     static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_heavy2.ember_weapon_heavy2'"));		
 	SwordMeshes.Add(SkeletalMesh.Object);
 	
-    static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh2(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_katana.ember_weapon_katana'"));
-	SwordMeshes.Add(SkeletalMesh2.Object);
+    //static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh2(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_katana.ember_weapon_katana'"));
+	//SwordMeshes.Add(SkeletalMesh2.Object);
 
-    static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh3(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_heavy.ember_weapon_heavy'"));
-	SwordMeshes.Add(SkeletalMesh3.Object);
+    //static ConstructorHelpers::FObjectFinder <USkeletalMesh>SkeletalMesh3(TEXT("SkeletalMesh'/Game/ArtAnimation/EP_Weapons/ember_weapon_heavy.ember_weapon_heavy'"));
+	//SwordMeshes.Add(SkeletalMesh3.Object);
 
-    Mesh->SetSkeletalMesh(SwordMeshes[1]);
+    Mesh->SetSkeletalMesh(SwordMeshes[0]);
     Mesh->SetMaterial(0, Material_Blue.Object);
 
     RootComponent = Mesh;
@@ -77,13 +77,13 @@ void ASwordModel::TraceSword()
             // Do the trace for each point (debug only atm)
             for (int i = 0; i < nArray.Num(); ++i)
                 {
-                    if(i < 5)
+                    if(i < nArray.Num()/3)
                         DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(255,0,255),  false, 2, 0,  1 );
 
-                    else if (i >= 5 && i < 10)
+                    else if (i >= nArray.Num()/3 && i < (2*nArray.Num())/3)
                         DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(0,0,255),  false, 2, 0,  1 );
 
-                    else if (i >= 10 && i < 15)
+					else if (i >= (2*nArray.Num())/3 && i < nArray.Num())
                         DrawDebugLine(GetWorld(), oldPoints[i],  nArray[i],  FColor(34, 139, 34),  false, 2, 0,  1 );
 
                     if (GetWorld()->LineTraceSingle(testHitResult, nArray[i], oldPoints[i], ECC_WorldStatic, TraceParams))

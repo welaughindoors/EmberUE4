@@ -19,7 +19,7 @@ class ASwordModel : public AActor
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sword Variables")
     float tracerAmount;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mesh)
     TArray<USkeletalMesh *> SwordMeshes;
 
 
