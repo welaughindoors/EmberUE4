@@ -111,24 +111,32 @@ void AEmberUE4Character::SetupPlayerInputComponent(class UInputComponent* InputC
     InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AEmberUE4Character::TouchStarted);
 }
 
+//void AEmberUE4Character::DebugMessage(FString string)
+//{
+    //EmberUtilities::Debug(string);
+//}
+
 void AEmberUE4Character::W_Pressed()
 {
-	Keyboard_WASD_Hook[0] = Keyboard_WASD_Hook[0] ^ 1;
+	Keyboard_Hook_W = !Keyboard_Hook_W;
 
     //if(Keyboard_WASD_Hook[0] & 1)
+    //if(Keyboard_Hook_W)
         //EmberUtilities::Debug("Active");
+    //else
+        //EmberUtilities::Debug("Inactive");
 }
 void AEmberUE4Character::A_Pressed()
 {
-	Keyboard_WASD_Hook[1] = Keyboard_WASD_Hook[1] ^ 1;
+Keyboard_Hook_A = !Keyboard_Hook_A;
 }
 void AEmberUE4Character::S_Pressed()
 {
-	Keyboard_WASD_Hook[2] = Keyboard_WASD_Hook[2] ^ 1;
+	Keyboard_Hook_S = !Keyboard_Hook_S;
 }
 void AEmberUE4Character::D_Pressed()
 {
-	Keyboard_WASD_Hook[3] = Keyboard_WASD_Hook[3] ^ 1;
+	Keyboard_Hook_D = !Keyboard_Hook_D;
 }
 
 void AEmberUE4Character::Tick(float DeltaTime)

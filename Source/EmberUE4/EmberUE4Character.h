@@ -5,7 +5,6 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "SwordModel.h"
 #include "EmberUtilities.h"
-//#include "EmberSwordCalculations.h";
 #include "EmberUE4Character.generated.h"
 
 
@@ -33,13 +32,29 @@ class AEmberUE4Character : public ACharacter
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     float BaseLookUpRate;
 
-    /** Hook to know what keys are pressed when executing an attack. 0 = W, 1 = A, 2 = S, 3 = D */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Movement Variables")
-    int32 Keyboard_WASD_Hook[4];
+    /** Hook for W*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    bool Keyboard_Hook_W;
+
+    /** Hook for A*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    bool Keyboard_Hook_A;
+
+    /** Hook for S*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    bool Keyboard_Hook_S;
+
+    /** Hook for D*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    bool Keyboard_Hook_D;
 
     /** Changes stance. Index based. 0 = light, 1 = balance, 2 = heavy */
     UFUNCTION(BlueprintCallable, Category = "Stance Functions")
     void ChangeStance(int32 Index);
+	
+    /** DebugMessage */
+    //UFUNCTION(BlueprintCallable, Category = "Stance Functions")
+    //void DebugMessage(FString string);
 
 protected:
 
@@ -83,7 +98,7 @@ protected:
 private:
     UClass* SwordBlueprint_GeneratedClass;
     ASwordModel * SwordModel;
-    //EmberSwordCalculations * ESwordCalculations;
+    //UEmberUtilitiesBP * EBP;
     bool DrawSwordDebug;
     bool DrawNewSwordDebug;
     FVector oldStart;
