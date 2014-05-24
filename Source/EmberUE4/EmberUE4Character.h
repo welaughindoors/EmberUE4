@@ -48,13 +48,30 @@ class AEmberUE4Character : public ACharacter
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
     bool Keyboard_Hook_D;
 
+    /** Current Stance. 0 = light, 1 = balance, 2 = heavy*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Sword Variables")
+    int32 CurrentStance;
+
+    /** Activates SwordCalculations(). */
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Sword Variables")
+    bool bPlayerIsAttacking;
+
     /** Changes stance. Index based. 0 = light, 1 = balance, 2 = heavy */
-    UFUNCTION(BlueprintCallable, Category = "Stance Functions")
+    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
     void ChangeStance(int32 Index);
-	
-    /** DebugMessage */
-    //UFUNCTION(BlueprintCallable, Category = "Stance Functions")
-    //void DebugMessage(FString string);
+
+    /** Attaches Sword and switches to default stance balance (1) */
+    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
+    void AttachSword();
+
+    /** Calculates Sword for 1 Tick (runs per tick by default) */
+    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
+    void SwordCalculations(float DeltaTime);
+
+    /** Hook for LeftClick */
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Character Variables")
+    bool bLeftClickPressed;
+
 
 protected:
 
@@ -88,9 +105,12 @@ protected:
 	void S_Pressed();
 	void D_Pressed();
 
-    void AttachSword();
+    void LeftClickPressed();
+    void PrepareAttack();
+
 	void SwordDebug();
 
+    void SetupVariables();
 protected:
     // APawn interface
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) OVERRIDE;
