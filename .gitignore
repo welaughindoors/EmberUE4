@@ -226,7 +226,6 @@ pip-log.txt
 *.sln
 *.uproject
 *.suo
-*.dll
 DerivedDataCache/
 Intermediate/
 Saved/Autosaves/
