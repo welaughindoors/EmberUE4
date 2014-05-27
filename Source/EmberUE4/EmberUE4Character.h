@@ -50,11 +50,11 @@ class AEmberUE4Character : public ACharacter
 
     /** LeftRight Resultant. -1 = left, +1 = right, 0 is center*/
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
-    int32 LR_Result;
+    float LR_Result;
 
     /** ForwardBack Resultant. -1 = back, +1 = forward, 0 is center*/
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
-    int32 FB_Result;
+    float FB_Result;
 
     /** Current Stance. 0 = light, 1 = balance, 2 = heavy*/
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Sword")
@@ -75,6 +75,10 @@ class AEmberUE4Character : public ACharacter
     /** Calculates Sword for 1 Tick (runs per tick by default) */
     UFUNCTION(BlueprintCallable, Category = "Ember Sword")
     void SwordCalculations(float DeltaTime);
+
+    /** Calculates Movement for 1 Tick (runs per tick by default) */
+    UFUNCTION(BlueprintCallable, Category = "Ember Character")
+    void MovementCalculations(float DeltaTime);
 
     /** Hook for LeftClick */
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Character")

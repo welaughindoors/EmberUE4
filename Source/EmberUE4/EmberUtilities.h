@@ -26,6 +26,14 @@ public:
 		if(GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, buffer);
 	}
+	// Print float
+	static void Debug(float number)
+	{
+		char buffer[256];
+		sprintf(buffer,"%f", number);
+		if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, buffer);
+	}
 
 	// Print char*
 	static void Debug(char * string)

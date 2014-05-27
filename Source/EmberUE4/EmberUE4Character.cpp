@@ -89,6 +89,14 @@ void AEmberUE4Character::Tick(float DeltaTime)
     if(bLeftClickPressed) SwordDebug();
 
     SwordCalculations(DeltaTime);
+
+    MovementCalculations(DeltaTime);
+}
+
+void AEmberUE4Character::MovementCalculations(float DeltaTime)
+{
+    LR_Result = FMath::Lerp( LR_Result , float(Keyboard_Hook_D - Keyboard_Hook_A), 2*DeltaTime);
+    FB_Result = FMath::Lerp( FB_Result , float(Keyboard_Hook_W - Keyboard_Hook_S), 2*DeltaTime);
 }
 
 void AEmberUE4Character::SwordCalculations(float DeltaTime)
@@ -191,11 +199,11 @@ void AEmberUE4Character::D_Pressed()
 
 void AEmberUE4Character::GetLeftRightResultant()
 {
-    LR_Result = Keyboard_Hook_D - Keyboard_Hook_A;
+    // LR_Result = Keyboard_Hook_D - Keyboard_Hook_A;
 }
 void AEmberUE4Character::GetForwardBackResultant()
 {
-    FB_Result = Keyboard_Hook_W - Keyboard_Hook_S;
+    // FB_Result = Keyboard_Hook_W - Keyboard_Hook_S;
 }
 //////////////////////////////////////////////////////////////////////////
 // Functions
