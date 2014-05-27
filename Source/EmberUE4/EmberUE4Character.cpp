@@ -171,21 +171,32 @@ void AEmberUE4Character::LeftClickPressed()
 void AEmberUE4Character::W_Pressed()
 {
     Keyboard_Hook_W = !Keyboard_Hook_W;
+    GetForwardBackResultant();
 }
 void AEmberUE4Character::A_Pressed()
 {
     Keyboard_Hook_A = !Keyboard_Hook_A;
+    GetLeftRightResultant();
 }
 void AEmberUE4Character::S_Pressed()
 {
     Keyboard_Hook_S = !Keyboard_Hook_S;
+    GetForwardBackResultant();
 }
 void AEmberUE4Character::D_Pressed()
 {
     Keyboard_Hook_D = !Keyboard_Hook_D;
+    GetLeftRightResultant();
 }
 
-
+void AEmberUE4Character::GetLeftRightResultant()
+{
+    LR_Result = Keyboard_Hook_D - Keyboard_Hook_A;
+}
+void AEmberUE4Character::GetForwardBackResultant()
+{
+    FB_Result = Keyboard_Hook_W - Keyboard_Hook_S;
+}
 //////////////////////////////////////////////////////////////////////////
 // Functions
 

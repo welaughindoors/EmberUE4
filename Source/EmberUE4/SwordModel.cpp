@@ -30,10 +30,10 @@ ASwordModel::ASwordModel(const class FPostConstructInitializeProperties &PCIP)
 
 void ASwordModel::SetSkeletalMesh(int Index)
 {
-    if (Index > SwordMeshes.Num()) return;
-
-    Mesh->SetSkeletalMesh(SwordMeshes[Index]);
+    if(EmberUtilities::SafeToUseInArray(Index, SwordMeshes.Num()))
+        Mesh->SetSkeletalMesh(SwordMeshes[Index]);
 }
+
 FVector ASwordModel::StartSocket()
 {
     return Mesh->GetSocketLocation("StartControl");

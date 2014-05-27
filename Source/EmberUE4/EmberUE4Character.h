@@ -33,46 +33,52 @@ class AEmberUE4Character : public ACharacter
     float BaseLookUpRate;
 
     /** Hook for W*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
     bool Keyboard_Hook_W;
 
     /** Hook for A*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
     bool Keyboard_Hook_A;
 
     /** Hook for S*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
     bool Keyboard_Hook_S;
 
     /** Hook for D*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Movement Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
     bool Keyboard_Hook_D;
 
+    /** LeftRight Resultant. -1 = left, +1 = right, 0 is center*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
+    int32 LR_Result;
+
+    /** ForwardBack Resultant. -1 = back, +1 = forward, 0 is center*/
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Movement")
+    int32 FB_Result;
+
     /** Current Stance. 0 = light, 1 = balance, 2 = heavy*/
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Sword Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Sword")
     int32 CurrentStance;
 
     /** Activates SwordCalculations(). */
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Sword Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Sword")
     bool bPlayerIsAttacking;
 
     /** Changes stance. Index based. 0 = light, 1 = balance, 2 = heavy */
-    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
+    UFUNCTION(BlueprintCallable, Category = "Ember Sword")
     void ChangeStance(int32 Index);
 
     /** Attaches Sword and switches to default stance balance (1) */
-    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
+    UFUNCTION(BlueprintCallable, Category = "Ember Sword")
     void AttachSword();
 
     /** Calculates Sword for 1 Tick (runs per tick by default) */
-    UFUNCTION(BlueprintCallable, Category = "Sword Functions")
+    UFUNCTION(BlueprintCallable, Category = "Ember Sword")
     void SwordCalculations(float DeltaTime);
 
     /** Hook for LeftClick */
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Character Variables")
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Character")
     bool bLeftClickPressed;
-
-
 protected:
 
     /** Called for forwards/backward input */
@@ -107,6 +113,11 @@ protected:
 
     void LeftClickPressed();
     void PrepareAttack();
+	
+	
+    void GetLeftRightResultant();
+    void GetForwardBackResultant();
+
 
 	void SwordDebug();
 
