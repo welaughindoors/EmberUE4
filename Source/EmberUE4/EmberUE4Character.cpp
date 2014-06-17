@@ -66,6 +66,7 @@ void AEmberUE4Character::SetupVariables()
     DrawNewSwordDebug = false;
     bPlayerIsAttacking = false;
     bLeftClickPressed = false;
+
 }
 
 // Attaches sword to model. Runs in BeginPlay
@@ -103,7 +104,7 @@ void AEmberUE4Character::SwordCalculations(float DeltaTime)
 {
     if(bPlayerIsAttacking)   
     {
-
+		EmberUtilities::Debug("IsAttacking");
     }
 }
 
@@ -172,8 +173,7 @@ void AEmberUE4Character::LeftClickPressed()
         If left click isn't pressed, do nothing
 	*/
     bLeftClickPressed ? SwordModel ? SwordModel->ResetSword() : AttachSword() : false;
-
-    PrepareAttack();
+    bLeftClickPressed ? PrepareAttack() : false;
 }
 
 void AEmberUE4Character::W_Pressed()
@@ -208,47 +208,164 @@ void AEmberUE4Character::GetForwardBackResultant()
 //////////////////////////////////////////////////////////////////////////
 // Functions
 
+void AEmberUE4Character::ResetMontageToIdle()
+{
+    PlayAnimMontage(AttackMontage, 1.0, "med_base");
+}
+
 void AEmberUE4Character::PrepareAttack()
 {
     int iTotalKeyFlag = 0;
 
     iTotalKeyFlag = Keyboard_Hook_W + Keyboard_Hook_A + Keyboard_Hook_S + Keyboard_Hook_D;
 
-    // switch(iTotalKeyFlag)
-    //     {
-    //         //no keys pressed
-    //         case 0:
-    //             forwardAttack();
-    //         break;
+    EmberUtilities::Debug(iTotalKeyFlag);
 
-    //         //one key pressed 
-    //         case 1:
-    //             if((savedByteDirection[0] ^ 1) == 0 ) forwardAttack(); //W
-    //             if((savedByteDirection[1] ^ 1) == 0 ) leftAttack(); //A
-    //             if((savedByteDirection[2] ^ 1) == 0 ) backAttack(); //S
-    //             if((savedByteDirection[3] ^ 1) == 0 ) rightAttack(); //D
-    //         break;
+    switch(iTotalKeyFlag)
+        {
+            //no keys pressed
+        //     case 0:
+        //         forwardAttack();
+        //     break;
 
-    //         //two keys pressed 
-    //         case 2:
-    //             if((savedByteDirection[0] ^ 1) == 0 && (savedByteDirection[1] ^ 1) == 0 ) forwardLeftAttack(); //W+A
-    //             else if((savedByteDirection[0] ^ 1) == 0 && (savedByteDirection[3] ^ 1) == 0 ) forwardRightAttack(); //W+D
-    //             else if((savedByteDirection[2] ^ 1) == 0 && (savedByteDirection[1] ^ 1) == 0 ) backLeftAttack(); //S+A
-    //             else if((savedByteDirection[2] ^ 1) == 0 && (savedByteDirection[3] ^ 1) == 0 ) backRightAttack(); //S+D
+        //     //one key pressed 
+        //     case 1:
+        //         if(Keyboard_Hook_W) forwardAttack(); //W
+        //         if(Keyboard_Hook_A) leftAttack(); //A
+        //         if(Keyboard_Hook_S) backAttack(); //S
+        //         if(Keyboard_Hook_D) rightAttack(); //D
+        //     break;
 
-    //             //for keys W + S and A + D
-    //             else forwardAttack();
+        //     //two keys pressed 
+        //     case 2:
+            
+        //              if(Keyboard_Hook_W && Keyboard_Hook_A) forwardLeftAttack(); //W+A
+        //         else if(Keyboard_Hook_W && Keyboard_Hook_D) forwardRightAttack(); //W+D
+        //         else if(Keyboard_Hook_S && Keyboard_Hook_A) backLeftAttack(); //S+A
+        //         else if(Keyboard_Hook_S && Keyboard_Hook_D) backRightAttack(); //S+D
 
-    //         break;
+        //         //for keys W + S and A + D
+        //         else forwardAttack();
 
-    //         //3-4 keys pressed
-    //         case 3:
-    //         case 4:
-    //             forwardAttack();
-    //         break;
+        //     break;
+
+        //     //3-4 keys pressed
+        //     case 3:
+        //     case 4:
+        //         forwardAttack();
+        //     break;
         
-    //     }
+        // }
+            case 0:
+                RationalizeAttack(1);
+            break;
+
+                    case 1:
+                if(Keyboard_Hook_W) RationalizeAttack(1); //W
+                if(Keyboard_Hook_A) RationalizeAttack(2); //A
+                if(Keyboard_Hook_S) RationalizeAttack(3); //S
+                if(Keyboard_Hook_D) RationalizeAttack(4); //D
+            break;
+
+            //two keys pressed 
+            case 2:
+            
+                     if(Keyboard_Hook_W && Keyboard_Hook_A) RationalizeAttack(5); //W+A
+                else if(Keyboard_Hook_W && Keyboard_Hook_D) RationalizeAttack(6); //W+D
+                else if(Keyboard_Hook_S && Keyboard_Hook_A) RationalizeAttack(7); //S+A
+                else if(Keyboard_Hook_S && Keyboard_Hook_D) RationalizeAttack(8); //S+D
+
+                //for keys W + S and A + D
+                else RationalizeAttack(1);
+
+            break;
+
+            //3-4 keys pressed
+            case 3:
+            case 4:
+                RationalizeAttack(1);
+            }
+     // PlayAnimMontage(AttackMontage, 1.0);
 }
+
+void AEmberUE4Character::RationalizeAttack(int32 AttackID)
+{
+    float inRate = 1;
+    FName SectionName;
+    switch(AttackID)
+    {
+        case 1:
+            inRate = 0.7;
+            SectionName = "med_forward";
+        break;
+        case 2:
+            inRate = 0.7;
+            SectionName = "med_left";
+        break;
+        case 3:
+            inRate = 0.7;
+            SectionName = "med_forward";
+        break;
+        case 4:
+            inRate = 0.7;
+            SectionName = "med_right";
+        break;
+        case 5:
+            inRate = 0.7;
+            SectionName = "med_diag_left";
+        break;
+        case 6:
+            inRate = 0.7;
+            SectionName = "med_diag_right";
+        break;
+        case 7:
+            inRate = 0.2;
+            SectionName = "med_diag_left_reverse";
+        break;
+        case 8:
+            inRate = 0.2;
+            SectionName = "med_diag_right_reverse";
+        break;
+    }
+    EmberUtilities::Debug(AttackID);
+    EmberUtilities::Debug(SectionName);
+    EmberUtilities::Debug(inRate);
+    PlayAnimMontage(AttackMontage, inRate, SectionName);
+}
+
+void AEmberUE4Character::forwardAttack()
+{
+    EmberUtilities::Debug("click");
+    EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_forward"));    
+}
+void AEmberUE4Character::leftAttack()
+{
+    EmberUtilities::Debug("click");
+    EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_left"));    
+}
+void AEmberUE4Character::rightAttack()
+{
+    EmberUtilities::Debug("click");
+    EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_right"));     
+}
+void AEmberUE4Character::backAttack()
+{
+    EmberUtilities::Debug("click");
+    EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_forward"));     
+}
+
+// float AEmberUE4Character::PlayAnimMontage(class UAnimMontage* AnimMontage, float InPlayRate)
+// {
+//       float Duration = 0.0f;
+ 
+//     //modified from shootergameCharacter.cpp
+//     if (AnimMontage && Mesh && Mesh->AnimScriptInstance)
+//     {
+//        Duration = Mesh->AnimScriptInstance->Montage_Play(AnimMontage, InPlayRate);
+//     }
+ 
+//     return Duration;    
+// }
 
 //////////////////////////////////////////////////////////////////////////
 // Stances

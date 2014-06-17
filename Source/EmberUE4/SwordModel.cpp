@@ -119,5 +119,5 @@ void ASwordModel::TraceSword()
 */
 void ASwordModel::CalculateDamage(FHitResult HitResult, int32 iCategory)
 {
-    EmberUtilities::Debug(HitResult.Component->GetName());
+    //EmberUtilities::Debug(HitResult.Component->GetName());
 }

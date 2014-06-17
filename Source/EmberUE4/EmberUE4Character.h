@@ -16,6 +16,9 @@ class AEmberUE4Character : public ACharacter
     virtual void BeginPlay() OVERRIDE;
     virtual void Tick(float) OVERRIDE;
 
+
+    // float PlayAnimMontage(class UAnimMontage* AnimMontage, float InPlayRate = 1.f, FName StartSectionName = NAME_None) ;
+
     /** Camera boom positioning the camera behind the character */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     TSubobjectPtr<class USpringArmComponent> CameraBoom;
@@ -83,6 +86,27 @@ class AEmberUE4Character : public ACharacter
     /** Hook for LeftClick */
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Ember Character")
     bool bLeftClickPressed;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=Animation)
+    UAnimMontage* AttackMontage;
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void forwardAttack();
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void ResetMontageToIdle();
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void backAttack();
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void leftAttack();
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void rightAttack();
+
+    UFUNCTION(BlueprintCallable, Category = "Ember Combat")
+    void RationalizeAttack(int32 AttackID);
 protected:
 
     /** Called for forwards/backward input */
@@ -126,6 +150,8 @@ protected:
 	void SwordDebug();
 
     void SetupVariables();
+
+    // float PlayAnimMontage(class UAnimMontage* AnimMontage, float InPlayRate);
 protected:
     // APawn interface
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) OVERRIDE;
