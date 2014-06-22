@@ -2,6 +2,51 @@
 	"news":
 	[
 		{
+			"id": "29ad1b2d5fca4a4eae40a2c23413cfb6",
+			"title": "New Release: Blackjack",
+			"excerpt": "Now available in the Marketplace! Dig in to this simple mobile game made entirely in Blueprints.",
+			"fulltext": "Now available for free in the Marketplace! Blueprints can be used to make just about any type of game. But there is nothing like a good ol’ game of cards. Black Jack anyone?",
+			"icon": "blackjack_sm.png",
+			"issued": "2014.06.18-12.00.00",
+			"url": "ue4://market/BlackJack_4.2"
+		},
+		{
+			"id": "a500039b61174f3fa6d758366c922b42",
+			"title": "Tutorial: Blueprint Character Movement",
+			"excerpt": "Tutorial on creating character movements with Blueprints",
+			"fulltext": "This tutorial describes a number of features in UE4 that make it easier to create character movement.",
+			"icon": "blueprint_icon_b.png",
+			"issued": "2014.06.16-12.00.00",
+			"url": "https://www.unrealengine.com/blog/new-blueprint-character-movement-features"
+		},
+		{
+			"id": "448aafa543fd4060bfd0fdb62d6f087f",
+			"title": "Blog: Transitioning from UE3 to UE4",
+			"excerpt": "An end users experience with transitioning to UE4",
+			"fulltext": "Matt Stafford from Pub Games describes his experience with transitioning game development from UE3 to UE4.",
+			"icon": "ue4transition_sm.png",
+			"issued": "2014.06.05-12.00.00",
+			"url": "https://www.unrealengine.com/blog/transitioning-from-ue3-to-ue4"
+		},
+		{
+			"id": "1e08e8172ee945418633d27a2f96905c",
+			"title": "Unreal Engine 4.2 Release",
+			"excerpt": "The latest version of Unreal Engine has been released today.",
+			"fulltext": "This update includes many cool new features, such as vehicles, camera animation system, new Blueprint features, as well as example content and lots of bug fixes!",
+			"icon": "ue4release_sm.png",
+			"issued": "2014.06.04-12.00.00",
+			"url": "https://www.unrealengine.com/blog/unreal-engine-42-release"
+		},
+		{
+			"id": "7ca5fe1827814377b74111a463784937",
+			"title": "Blog: Damage in UE4",
+			"excerpt": "Introduction to damage concepts in Unreal Engine",
+			"fulltext": "This is a quick primer on the damage functionality that is included with UE4's game framework in C++ and Blueprints",
+			"icon": "damageue4_icon_sm.png",
+			"issued": "2014.05.21-12.00.00",
+			"url": "https://www.unrealengine.com/blog/damage-in-ue4"
+		},
+		{
 			"id": "de7573ce22674b9980c4f92ed46fb4bd",
 			"title": "New Release: Stylized Rendering",
 			"excerpt": "This sample showcases the rendering flexibly of Unreal Engine 4.",
@@ -108,33 +153,6 @@
 			"icon": "blueprint_icon_b.png",
 			"issued": "2014.04.21-09.00.00",
 			"url": "http://www.unrealengine.com/blog?category=Blueprints"
-		},
-		{
-			"id": "75e8097409ca422597c31c750280450c",
-			"title": "New! Unreal Matinee Tutorial",
-			"excerpt": "Get a few tips and tricks on the UE4 cinematic system.",
-			"fulltext": "Get a few tips and tricks on the UE4 cinematic system.",
-			"icon": "matinee_icon.png",
-			"issued": "2014.04.16-18.32.00",
-			"url": "http://wiki.unrealengine.com/Editing_Matinee_Basics:_Creating_Your_First_Matinee_Sequence"
-		},
-		{
-			"id": "516e7605129a4fc288289867d195a6ad",
-			"title": "Effects Cave Showcase - Free Download",
-			"excerpt": "The Effects Cave showcase is a great way to play with particle systems, decals and visual effects.",
-			"fulltext": "The Effects Cave showcase is a great way to play with particle systems, decals and visual effects.",
-			"icon": "cave_icon_b.png",
-			"issued": "2014.04.10-09.00.00",
-			"url": "ue4://market/Effects"
-		},
-		{
-			"id": "560eef25b41e4d6687ac9bba753977cc",
-			"title": "Realistic Rendering Showcase - Free Download",
-			"excerpt": "The Realistic Rendering showcase is a lifelike scene that highlights physically-based materials and lighting in UE4.",
-			"fulltext": "The Realistic Rendering showcase is a lifelike scene that highlights physically-based materials and lighting in UE4.",
-			"icon": "realistic_icon.png",
-			"issued": "2014.04.03-09.00.00",
-			"url": "ue4://market/RealisticRendering"
 		}
 	]
 }
