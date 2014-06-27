@@ -55,4 +55,5 @@ class ASwordModel : public AActor
 
 public:
     TArray <FVector> oldPoints;
+    AController * parent;
 };

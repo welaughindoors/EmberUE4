@@ -77,6 +77,7 @@ void AEmberUE4Character::AttachSword()
     {
         SwordModel = World->SpawnActor<ASwordModel>(SwordBlueprint_GeneratedClass);
         SwordModel->AttachRootComponentTo(this->Mesh, FName(TEXT("RIGHT_HAND_ATTACH")));
+		SwordModel->parent = this->Controller;
     }
     ChangeStance(1);
 }
@@ -87,7 +88,7 @@ void AEmberUE4Character::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if(bLeftClickPressed) SwordDebug();
+    // if(bLeftClickPressed) SwordDebug();
 
     SwordCalculations(DeltaTime);
 
@@ -104,7 +105,8 @@ void AEmberUE4Character::SwordCalculations(float DeltaTime)
 {
     if(bPlayerIsAttacking)   
     {
-		EmberUtilities::Debug("IsAttacking");
+		//EmberUtilities::Debug("IsAttacking");
+        SwordDebug();
     }
 }
 
@@ -219,43 +221,10 @@ void AEmberUE4Character::PrepareAttack()
 
     iTotalKeyFlag = Keyboard_Hook_W + Keyboard_Hook_A + Keyboard_Hook_S + Keyboard_Hook_D;
 
-    EmberUtilities::Debug(iTotalKeyFlag);
+    // EmberUtilities::Debug(iTotalKeyFlag);
 
     switch(iTotalKeyFlag)
         {
-            //no keys pressed
-        //     case 0:
-        //         forwardAttack();
-        //     break;
-
-        //     //one key pressed 
-        //     case 1:
-        //         if(Keyboard_Hook_W) forwardAttack(); //W
-        //         if(Keyboard_Hook_A) leftAttack(); //A
-        //         if(Keyboard_Hook_S) backAttack(); //S
-        //         if(Keyboard_Hook_D) rightAttack(); //D
-        //     break;
-
-        //     //two keys pressed 
-        //     case 2:
-            
-        //              if(Keyboard_Hook_W && Keyboard_Hook_A) forwardLeftAttack(); //W+A
-        //         else if(Keyboard_Hook_W && Keyboard_Hook_D) forwardRightAttack(); //W+D
-        //         else if(Keyboard_Hook_S && Keyboard_Hook_A) backLeftAttack(); //S+A
-        //         else if(Keyboard_Hook_S && Keyboard_Hook_D) backRightAttack(); //S+D
-
-        //         //for keys W + S and A + D
-        //         else forwardAttack();
-
-        //     break;
-
-        //     //3-4 keys pressed
-        //     case 3:
-        //     case 4:
-        //         forwardAttack();
-        //     break;
-        
-        // }
             case 0:
                 RationalizeAttack(1);
             break;
@@ -285,7 +254,6 @@ void AEmberUE4Character::PrepareAttack()
             case 4:
                 RationalizeAttack(1);
             }
-     // PlayAnimMontage(AttackMontage, 1.0);
 }
 
 void AEmberUE4Character::RationalizeAttack(int32 AttackID)
@@ -327,30 +295,30 @@ void AEmberUE4Character::RationalizeAttack(int32 AttackID)
             SectionName = "med_diag_right_reverse";
         break;
     }
-    EmberUtilities::Debug(AttackID);
-    EmberUtilities::Debug(SectionName);
-    EmberUtilities::Debug(inRate);
+    // EmberUtilities::Debug(AttackID);
+    // EmberUtilities::Debug(SectionName);
+    // EmberUtilities::Debug(inRate);
     PlayAnimMontage(AttackMontage, inRate, SectionName);
 }
 
 void AEmberUE4Character::forwardAttack()
 {
-    EmberUtilities::Debug("click");
+    // EmberUtilities::Debug("click");
     EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_forward"));    
 }
 void AEmberUE4Character::leftAttack()
 {
-    EmberUtilities::Debug("click");
+    // EmberUtilities::Debug("click");
     EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_left"));    
 }
 void AEmberUE4Character::rightAttack()
 {
-    EmberUtilities::Debug("click");
+    // EmberUtilities::Debug("click");
     EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_right"));     
 }
 void AEmberUE4Character::backAttack()
 {
-    EmberUtilities::Debug("click");
+    // EmberUtilities::Debug("click");
     EmberUtilities::Debug(PlayAnimMontage(AttackMontage, 5.0, "med_forward"));     
 }
 

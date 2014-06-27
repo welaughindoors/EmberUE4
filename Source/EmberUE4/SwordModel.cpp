@@ -119,5 +119,12 @@ void ASwordModel::TraceSword()
 */
 void ASwordModel::CalculateDamage(FHitResult HitResult, int32 iCategory)
 {
-    //EmberUtilities::Debug(HitResult.Component->GetName());
+    EmberUtilities::Debug(HitResult.Component->GetName());
+    if(HitResult.Component->GetName() == "SkeletalMeshComponent0")
+    {
+		FDamageEvent a;
+        //HitResult.Actor.Get()->TakeDamage(120, a, parent, this);
+		parent->TakeDamage(10, a, parent, this);
+        EmberUtilities::Debug("fuckers dead");
+    }
 }
